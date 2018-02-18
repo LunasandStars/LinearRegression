@@ -44,8 +44,8 @@ b_opt = linearRegression(trainingData,trainingLabels)
 pr = prediction(testData, b_opt)
 acc = accuracy(pr, testLabels)
 #Print b_opt and accurary
-#>>>print "The b_opt is:", b_opt
-#>>>print "The accuracy is:", acc, "%"
+print ("The b_opt (Optimal Coefficient) of Linear Regression:", b_opt)
+print ("The accuracy of Linear Regression:", acc, "%")
 
 
 # Compute error from test data to line of regression
@@ -58,15 +58,12 @@ acc = accuracy(pr, testLabels)
 def normalizeData(dataNorm):
     return dataNorm / 255
 
-#This represents the learning rate, number of times you want it to iterate
-
+#
 def cost(X, y, b):
     return numpy.sum((numpy.dot(X, b) - numpy.array(y))**2)
 
 
 def gradientDescent(X, y, b):
-    # for index in range(len(X)):
-        # X = normalizeData(X)
     return -numpy.dot(X.transpose(), y) + numpy.dot(numpy.dot(X.transpose(), X), b)
 trainingData = normalizeData(trainingData)
 testData = normalizeData(testData)
@@ -84,18 +81,19 @@ for i in range(0, iterator):
     costs.append(b_cost)
 
 # check convergence
-plt.plot(costs)
-plt.show()
+#plt.plot(costs)
+#plt.show()
 
 # plt.plot(bs, costs)
 # plt.show()
-
 # b_opt = b_est
 # b_opt
-
 # pr = gradientDescent(trainingData,trainingLabels, b_est)
 # print(b_est)
+
 pr = prediction(testData, b_est)
 accuracyOfGD = accuracy(pr, testLabels)
-
+totalDifference = sum(abs(b_opt - b_est))
+print ("The b_est (Optimal Coefficient) of Gradient Descent:", b_est)
 print ("The accuracy of Gradient Descent is: ", accuracyOfGD, "%")
+print ("The difference between b_opt and b_est: ", totalDifference)
